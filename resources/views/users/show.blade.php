@@ -13,18 +13,19 @@
                 <p>About Task:<br>{{ $task->short_description }}</p>
                 <p>Detailed Description: <br>{{ $task->long_description }}</p>
                 <h4>User: {{ $task->user->name }}</h4>
-                <p>Current Status: {{ $task->status->name }}</p>
+                <p>Current Status: <u>{{ $task->status->name }}</u></p>
 
-                <form action="">
+                <form action="{{ route('change.status', $task) }}" method="POST">
                     @csrf
+                    @method('PUT')
                     <div class="form-group">
-                        <select class="form-control" name="status">
-                            <option value="Todo" default>Todo</option>
-                            <option value="Working On">Working On</option>
-                            <option value="Done">Done</option>
+                        <select class="form-control" name="status_id">
+                            @foreach($statuses as $status)
+                            <option value="{{ $status->id }}">{{ $status->name }}</option>
+                            @endforeach
                         </select>
                     </div>
-                    <button class="btn btn-success">Change Status</button>
+                    <button type="submit" class="btn btn-success">Change Status</button>
                 </form>
             </div>
         </div>

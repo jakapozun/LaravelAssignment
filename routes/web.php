@@ -19,14 +19,12 @@ Auth::routes();
 
 Route::middleware('auth')->group(function() {
 
-
-
 Route::get('/', function () {
     return redirect()->route('todos');
 });
 
 //admin
-Route::prefix('admin')->group(function () {
+Route::prefix('admin')->middleware('isAdmin')->group(function () {
     Route::get('/', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.index');
 
     Route::get('/add-task', [\App\Http\Controllers\TaskController::class, 'createTask'])->name('add.tasks');
@@ -54,6 +52,7 @@ Route::prefix('tasks')->group(function () {
     Route::get('/working-on', [App\Http\Controllers\TaskController::class, 'wo'])->name('wo');
     Route::get('/done', [App\Http\Controllers\TaskController::class, 'done'])->name('done');
     Route::get('/{task}', [App\Http\Controllers\TaskController::class, 'show'])->name('show');
+    Route::put('/change-status/{task}', [App\Http\Controllers\TaskController::class, 'changeStatus'])->name('change.status');
 });
 
 });
