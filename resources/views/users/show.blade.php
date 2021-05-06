@@ -13,7 +13,7 @@
                 <p>About Task:<br>{{ $task->short_description }}</p>
                 <p>Detailed Description: <br>{{ $task->long_description }}</p>
                 <h4>User: {{ $task->user->name }}</h4>
-                <p>Current Status: {{ $task->status }}</p>
+                <p>Current Status: {{ $task->status->name }}</p>
 
                 <form action="">
                     @csrf
