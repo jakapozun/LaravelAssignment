@@ -46,7 +46,7 @@ Route::prefix('admin')->middleware('isAdmin')->group(function () {
 
 });
 
-//tasks
+//tasks - users
 Route::prefix('tasks')->group(function () {
     Route::get('/todos', [App\Http\Controllers\TaskController::class, 'index'])->name('todos');
     Route::get('/working-on', [App\Http\Controllers\TaskController::class, 'wo'])->name('wo');

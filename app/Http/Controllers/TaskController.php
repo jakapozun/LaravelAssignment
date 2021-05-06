@@ -35,7 +35,7 @@ class TaskController extends Controller
 
     public function viewTasks()
     {
-        $tasks = Task::all();
+        $tasks = Task::orderBy('created_at', 'desc')->get();
         return view('admin/view-tasks', compact('tasks'));
     }
 
@@ -51,6 +51,8 @@ class TaskController extends Controller
         ]);
 
         Task::create($task);
+
+        session()->flash('success_message', 'Task created successfully!');
 
         return redirect()->route('view.tasks');
     }
@@ -94,6 +96,8 @@ class TaskController extends Controller
 
         $task->status_id = $request['status_id'];
         $task->save();
+
+        session()->flash('success_message', 'Status changed successfully!');
 
         return redirect()->route('todos');
     }

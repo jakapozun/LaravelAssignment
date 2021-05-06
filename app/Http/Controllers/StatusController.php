@@ -27,6 +27,8 @@ class StatusController extends Controller
 
         Status::create($status);
 
+        session()->flash('success_message', 'Status created successfully!');
+
         return redirect()->route('view.statuses');
     }
 
