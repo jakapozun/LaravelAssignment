@@ -15,22 +15,19 @@
             </a>
         </div>
 
-        <div class="col-12 mt-1">
-            <a href="{{ route('add-task') }}">
-                <button class="btn btn-primary btn-sm w-100">Add New Task</button>
-            </a>
-        </div>
-
         <hr>
 
         <div class="row mt-2">
             @foreach($tasks as $task)
                 <div class="card w-100 mb-2">
-                    <h5 class="card-header">{{ $task->title }}</h5>
+                    <h5 class="card-header">{{ $task->title }}
+                        <span class="badge badge-warning">Working On</span></h5>
                     <div class="card-body">
-                        <h3 class="card-title">{{ $task->task_date }}</h3>
                         <h5 class="card-title">{{ $task->short_description }}</h5>
-                        <p class="card-text">{{ $task->long_description }}</p>
+                        <h3 class="card-title">End date: {{ $task->task_date }}</h3>
+                        <a href="{{ route('show', $task) }}">
+                            <button class="btn btn-primary btn-sm">View Task</button>
+                        </a>
                     </div>
                 </div>
             @endforeach

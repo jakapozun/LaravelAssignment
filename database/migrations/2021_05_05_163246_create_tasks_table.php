@@ -20,7 +20,7 @@ class CreateTasksTable extends Migration
             $table->string('short_description');
             $table->date('task_date');
             $table->text('long_description');
-            $table->enum('status', ['Todo','Working On', 'Done'])->default('todo');
+            $table->foreignId('status_id');
             $table->timestamps();
         });
     }

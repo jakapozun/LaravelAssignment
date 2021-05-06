@@ -28,8 +28,18 @@ class TaskController extends Controller
         return view('users/done', compact('tasks'));
     }
 
-    public function addTask()
+    public function show(Task $task)
     {
-        return view('users/add-new');
+        return view('users/show', compact('task'));
+    }
+
+    public function createTask()
+    {
+        return view('admin/add-task');
+    }
+
+    public function viewTasks()
+    {
+        return view('admin/view-tasks');
     }
 }

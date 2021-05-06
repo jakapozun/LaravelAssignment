@@ -19,13 +19,19 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.index');
+
+//admin
+Route::prefix('admin')->group(function () {
+    Route::get('/add-task', [\App\Http\Controllers\TaskController::class, 'createTask'])->name('add.tasks');
+    Route::get('/all-tasks', [\App\Http\Controllers\TaskController::class, 'viewTasks'])->name('view.tasks');
+});
+
 //tasks
 Route::prefix('tasks')->group(function () {
     Route::get('/todos', [App\Http\Controllers\TaskController::class, 'index'])->name('todos');
     Route::get('/working-on', [App\Http\Controllers\TaskController::class, 'wo'])->name('wo');
     Route::get('/done', [App\Http\Controllers\TaskController::class, 'done'])->name('done');
-
-    Route::get('/add', [App\Http\Controllers\TaskController::class, 'addTask'])->name('add-task');
-
-
+    Route::get('/{task}', [App\Http\Controllers\TaskController::class, 'show'])->name('show');
 });
+
